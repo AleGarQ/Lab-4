@@ -15,7 +15,7 @@ import java.util.*;
 
 /**
  * This class print all the program.
- * @see java.lang.Object
+ * @see  java.lang.Object
  * @author Alejandro Garcia.<br>
  */
 public class Main{
