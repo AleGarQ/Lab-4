@@ -12,7 +12,7 @@ package model;
 
 /**
  * This class maintains the the medicine an their information.<br>
- * @author Sebastián Barrera.<br>
+ * @author Alejandro Garcia.<br>
  */
 public class ReqMed{
 
@@ -51,7 +51,7 @@ public class ReqMed{
 	 * @param pricePerDose Is the price of the dose<br>
 	 * @param frecuency Is the frecuency of application of the dose <br>
 	 */
-	public ReqMed(String name, double dose, double pricePerDose, String frecuency){
+	public ReqMed(String name, double dose, double pricePerDose, String frecuency) {
 		this.name = name;
 		this.dose = dose;
 		this.pricePerDose = pricePerDose;
@@ -123,16 +123,16 @@ public class ReqMed{
 	 * Calculate de medicine price
 	 * @return an <code>double</code> specifying the medicine price
 	 */
-	public double priceMed(){
-		double total = dose * pricePerDose;
-		return total;
+	public double priceMed() {
+		double totalPrice = dose * pricePerDose;
+		return totalPrice;
 	}
 
 	/**
 	 * Shows all the medicine information
 	 * @return an <code>String</code> specifying the medicine information
 	 */
-	public String showMedsinfo(){
+	public String showMedsinfo() {
 		String msg = "";
 		msg += "| Prescribed medication's name is: "+name+"\n";
 		msg += "| Prescribed medication's dose is: "+dose+"\n";

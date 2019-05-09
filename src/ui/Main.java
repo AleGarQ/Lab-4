@@ -16,7 +16,7 @@ import java.util.*;
 /**
  * This class print all the program.
  * @see java.lang.Object
- * @author Sebastián Barrera.
+ * @author Alejandro Garcia.<br>
  */
 public class Main{
 
@@ -45,12 +45,12 @@ public class Main{
 	//Methods
 
 	//--------------------------------------------------------------------------------------------------
-		public Main () {
-			init ();
+		public Main() {
+			initial();
 			reader = new Scanner(System.in);
 		}
 
-	public void init() {
+	public void initial() {
 		shop = new Veterinary();	
 
 		MiniRoom room1 = new MiniRoom(true, 1, "", "", null);
@@ -64,21 +64,21 @@ public class Main{
 		
 		shop.createRooms(room1, room2, room3 ,room4, room5, room6, room7, room8);
 
-		Client sebas = new Client("Sebastian Barrera", "1144105003", "Cra 68 # 16 - 07", "3214650140");
+		Person sebas = new Person("Sebastian Barrera", "1144105003", "Cra 68 # 16 - 07", "3214650140");
 		Pet luna = new Pet("Luna", "Dog", 1.0, 15.0, 0.37, sebas);
 		ArrayList<Pet> sebasPets = new ArrayList<Pet>();
 		sebasPets.add(luna);
 		
 		shop.createPerson(sebas, sebasPets);
 
-		Client valen = new Client("Valentina Caicedo", "100527565", "Cra 96 # 34 - 78", "3137954480");
+		Person valen = new Person("Valentina Caicedo", "100527565", "Cra 96 # 34 - 78", "3137985448");
 		Pet rocco = new Pet("Rocco", "Dog", 1.0, 23.0, 0.47, valen);
 		ArrayList<Pet> valenPets = new ArrayList<Pet>();
 		valenPets.add(rocco);
 		
 		shop.createPerson(valen, valenPets);
 		
-		Client lina = new Client("Lina Maria Insuasty", "1006078287", "Roosevelt Ave", "5142841922");
+		Person lina = new Person("Lina Maria Insuasty", "1006078287", "Roosevelt Ave", "5142841922");
 		Pet paul = new Pet("Paul", "Other", 7.0, 70.0, 1.80, lina);
 		Pet daisy = new Pet("Daisy", "Dog", 3.0, 39.0, 1.0, lina);
 		ArrayList<Pet> gretelPets = new ArrayList<Pet>();
@@ -105,7 +105,7 @@ public class Main{
 
 		shop.startHospitalizeVet("Lina Maria Insuasty", "1006078287", "Paul", paulMedRec, petsMedsPaul, paul);
 
-		Client pablolondra = new Client("Pablo Londra", "1001237483", "Little Puerto Rico", "3128934055");
+		Person pablolondra = new Person("Pablo Londra", "1001237483", "Little Puerto Rico", "3128934055");
 		Pet arnold = new Pet("Arnold", "Cat", 2.0, 20.0, 0.48, pablolondra);
 		Pet francis = new Pet("Francis", "Bird", 4.0, 3.2, 0.15, pablolondra);
 		ArrayList<Pet> pablolondraPets = new ArrayList<Pet>();
@@ -133,42 +133,13 @@ public class Main{
 		shop.startHospitalizeVet("Pablo Londra", "1001237483", "Francis", aMedRec, petsMeds, francis);		
 	}
 
-	//  ******MAIN METHOD******
 	public static void main(String[] args) {
 		Main execute = new Main();
+		execute.showHeader();
 		execute.menu();	
 	}
 
-	// *************************************INTERFACE'S METHODS*************************************
-	public void showMenuOptions() {
-		System.out.println("");
-		System.out.println("1. Register a new client.");
-		System.out.println("2. Show clients & pets information.");
-		System.out.println("3. Show person's contact info of a hospitalized pet by putting owner’s name or pet’s name.");
-		System.out.println("4. Register a done service.");
-		System.out.println("5. Hospitalize a pet.");
-		System.out.println("6. Show medical records from hospitalized pets.");
-		System.out.println("7. Edit a medical record from a pet.");
-		System.out.println("8. Discharge a pet.");
-		System.out.println("9. Show income.");
-		System.out.println("10.Show average income per service.");
-		System.out.println("11.Show occupied mini room based on pet's full name.");
-		System.out.println("12.Show records from a pet.");
-		System.out.println("13.Edit address or phone number from a client.");
-		System.out.println("14.QUIT PROGRAM");
-		System.out.println("");
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-	}
-
-	public void typeSelectionMssg() {	
-		System.out.print(" Type the number of your selection: ");	
-	} 
-
-
-
-	//************************ MAIN INTERFACE ************************
-	public void menu() {
-		int userInput = 0;
+	public void showHeader() {
 		System.out.println("*****************************************************************************************************************************");
 		System.out.println("*****************************************************************************************************************************");
 		System.out.println("***************************                                                                       ***************************");
@@ -176,76 +147,103 @@ public class Main{
 		System.out.println("***************************                                                                       ***************************");
 		System.out.println("*****************************************************************************************************************************");
 		System.out.println("*****************************************************************************************************************************");
-		System.out.println("");                 
-		while (userInput != 14) {
+		System.out.println("");
+		String contin = reader.nextLine();
+	}
+
+	public void showMenuOptions() {
+		System.out.println("");
+		System.out.println("");
+		Calendar c1 = GregorianCalendar.getInstance();
+		System.out.println("															" + c1.getTime().toLocaleString() + "			           									 ");
+		System.out.println("_________________________________________________________________________________________________________________________________________________________");
+		System.out.println("|                                                                                                                                                       |");
+		System.out.println("|                                                                        OPTIONS MENU                                                                   |");
+		System.out.println("|                                                               CHOOSE AN OPTION WITH THE NUMBER                                                        |");
+		System.out.println("|_______________________________________________________________________________________________________________________________________________________|");
+		System.out.println("|                  |                  |                  |                  |                  |                  |                  |                  |");
+		System.out.println("|     Register     |   show clients   |   contact info   |  Register a done |    Hospitalize   |   show medical   |  edit a medical  |      Remove      |");
+		System.out.println("|      client      |      & pets      |       info       |      service     |      a pet       |     records      |    pet record    |      a pet       |");
+		System.out.println("|                  |    information   |                  |                  |   			   |                  |                  |                  |");
+		System.out.println("|         1        |        2         |        3         |        4         |        5         |        6         |        7         |        8         |");
+		System.out.println("|__________________|__________________|__________________|__________________|__________________|__________________|__________________|__________________|");
+		System.out.println("|                  |                  |                  |                  |                  |                                                        |");
+		System.out.println("|       Total      |   Show average   |    Show rooms    |     records      |   edit client    |                                                        |");
+		System.out.println("|      income      |income per service|     occupied     |    of a pet      |   information    |                                                        |");
+		System.out.println("|                  |                  |                  |                  |                  |                                                        |");
+		System.out.println("|         9        |        10        |         11       |        12        |        13        |                                                        |");
+		System.out.println("|__________________|__________________|__________________|__________________|__________________|________________________________________________________|");	
+	}
+
+	public void typeSelectionMssg() {	
+		System.out.println("--------------------------------------");
+		System.out.print("| Type the number of your selection: ");	
+	} 
+
+	public void plainLine() {
+		System.out.println("--------------------------------------");
+	}
+
+	public void menu() {
+		boolean back = false;
+		System.out.println("");
+		System.out.println("");                                                  
+		while (!back) {
 			showMenuOptions();
-			System.out.print(" Type the number of your selection: ");
-			userInput = reader.nextInt();
+			System.out.println("--------------------------------------");
+			System.out.print("| Type the number of your selection: ");
+			int option = reader.nextInt();
 			reader.nextLine();
-			switch (userInput) {
-				//REGISTER A NEW CLIENT
+			System.out.println("--------------------------------------");
+			switch (option) {
 				case 1: 
-					registerANewClient();
+					registerAClient();
 				break;
-				//SHOW CLIENTS & PETS INFORMATION
 				case 2: 
-					clientsInfoByGivenName();
-				break; 
-				//SHOW Client’S CONTACT INFO OF A HOSPITALIZED PET BY PUTTING OWNER’S NAME OR PET’S NAME
+					clientsInformation();
+				break; 				
 				case 3: 
-					contactInfoByNameOrPet(); 
-				break;
-				//REGISTER A DONE SERVICE
+					contactInformation(); 
+				break;				
 				case 4: 
 					registerAService();
-				break;
-				//HOSPITALIZE A PET
+				break;				
 				case 5:
 					hospitalizeAPet();
-				break; 
-				//SHOW MEDICAL RECORDS FROM HOSPITALIZED PETS
+				break; 				
 				case 6: 
 					showMedRecsFromHPet();
-				break; 
-				//EDIT A MEDICAL RECORD FROM A PET
+				break; 				
 				case 7: 
-					editMedRecFromAPet();
-				break;
-				//DISCHARGE A PET
+					editMedRec();
+				break;				
 				case 8: 
 					dischargeAPet();
-				break;
-				//SHOW TOTAL INCOME AND INCOME BY SERVICE
+				break;				
 				case 9: 
 					showIncome();
-				break;
-				//SHOW AVERAGE INCOME 
+				break;				
 				case 10: 
 					showAverageIncome();
-				break;
-				//SHOW OCCUPIED MINI ROOM BASED ON PET'S NAME
+				break;				
 				case 11: 
 					showMiniRoomNumberByPetsName();
-				break;
-				//SHOW RECORDS FROM A PET
+				break;				
 				case 12: 
 					showAllMedRecs4Pet();
-				break;
-				//EDIT CLIENTS INFO
+				break;				
 				case 13: 
 					changeClientsInfo();
-					break;
-				//QUIT PROGRAM
-				case 14: 
+					break;				
+				case 0: 
 					getOut();
-					break;
-				default:
-					break;	
+					back = false;
+				break;
 			}
 		}
 	}
 
-	public void registerANewClient() {
+	public void registerAClient() {
 		System.out.println("");
 		System.out.print("Please type the client's full name: "); 
 		String name = reader.nextLine();
@@ -257,12 +255,12 @@ public class Main{
 		String phone = reader.nextLine();
 		System.out.println("");
 		if (!(name.equals("")) && !(id.equals("")) && !(address.equals("")) && !(phone.equals(""))) {
-			Client theNew = new Client(name, id, address, phone);
+			Person theNew = new Person(name, id, address, phone);
 			System.out.print("How many pets of the client are customers here?\n"); 
-			int loopsy = reader.nextInt();
+			int timess = reader.nextInt();
 			reader.nextLine();
 			ArrayList<Pet> clientsPets = new ArrayList<Pet>();
-			for(int i = 0; i < loopsy; ++i) {
+			for(int i = 0; i < timess; ++i) {
 				System.out.println("");
 				System.out.println("");
 				System.out.println("----------------------------------------------------------------------------");
@@ -278,7 +276,7 @@ public class Main{
 				typeSelectionMssg();
 				int choise = reader.nextInt(); 
 				reader.nextLine();
-				;
+				plainLine();
 				System.out.println("");
 				String species = shop.convertChoise2Type(choise);
 				System.out.print("Please type the pet's age (years): "); 
@@ -309,7 +307,7 @@ public class Main{
 		} else {System.out.println("ERROR: Missing information.");}		
 	}
 
-	public void clientsInfoByGivenName() {
+	public void clientsInformation() {
 		System.out.println("");
 		System.out.print("Please type the client's full name to get his/her information: "); 
 		String clients = reader.nextLine();
@@ -324,11 +322,11 @@ public class Main{
 		System.out.print("\033[H\033[2J");  
 		System.out.flush(); 
 		System.out.println("");
-		System.out.println("THANK YOU");
+		System.out.println("THANK YOU FOR USING MY LIL PET SOFTWARE");
 		System.out.println("");
 	}
 						
-	public void contactInfoByNameOrPet() {
+	public void contactInformation() {
 		System.out.println("");
 		System.out.println("Please choose which kind of customer you will type his/her/its full name: "); 
 		System.out.println("1. Person.");
@@ -337,7 +335,7 @@ public class Main{
 		typeSelectionMssg();
 		int kind = reader.nextInt(); 
 		reader.nextLine();
-		;
+		plainLine();
 		if (kind == 1 || kind == 2) {
 			System.out.print("Please type the full name: "); 
 			String theName = reader.nextLine();
@@ -346,8 +344,10 @@ public class Main{
 			String personId = reader.nextLine();
 			System.out.println("");
 			System.out.println(shop.showContactInfo(kind, theName, personId));
-		} else {System.out.println("ERROR: Invalid selection.");
-				System.out.println("");}
+		} else {
+			System.out.println("ERROR: Invalid selection.");
+			System.out.println("");
+		}
 	}
 
 	public void hospitalizeAPet() {
@@ -486,7 +486,7 @@ public class Main{
 			String records = shop.showAPetMedRecs(name, id, petsName);
 			if (records.equals("")) {
 				System.out.println("This pet does not have any medical record.");
-			}else {
+			} else {
 				System.out.println("");
 				System.out.println(records);
 			}
@@ -520,7 +520,7 @@ public class Main{
 
 	}
 
-	public void editMedRecFromAPet() {
+	public void editMedRec() {
 		System.out.println("");
 		System.out.print("Please type the pet's full name: ");
 		String petsName = reader.nextLine();
@@ -539,7 +539,7 @@ public class Main{
 			typeSelectionMssg();
 			int edition = reader.nextInt();
 			reader.nextLine();
-			;
+			plainLine();
 			String symptomsEdit = "";
 			String diagnosysEdit = "";
 			String medsName = "";
@@ -619,7 +619,7 @@ public class Main{
 		typeSelectionMssg();
 		int edition = reader.nextInt();
 		reader.nextLine();
-		;
+		plainLine();
 		String newAddress = "";
 		String newPhone = "";
 		switch (edition) {
@@ -662,7 +662,7 @@ public class Main{
 			typeSelectionMssg();
 			int serviceSelection = reader.nextInt(); 
 			reader.nextLine();
-			;
+			plainLine();
 			char serviceChar = shop.convertChoise2Char(serviceSelection);
 			if (serviceChar != 'a') {
 				System.out.println("");
@@ -685,12 +685,12 @@ public class Main{
 					System.out.println("");
 					System.out.println("The service has been successfully registered!");
 					System.out.println("");
-				}else {
+				} else {
 					System.out.println("");
 					System.out.println("ERROR: Invalid date.");
 					System.out.println("");
 				}
-			}else {
+			} else {
 				System.out.println("");
 				System.out.println("ERROR: Invalid selection.");
 				System.out.println("");

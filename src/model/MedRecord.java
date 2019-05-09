@@ -14,7 +14,7 @@ import java.util.*;
 
 /**
  * This class controls all the records.<br>
- * @author Sebastián Barrera.<br>
+ * @author Alejandro Garcia.<br>
  */
 public class MedRecord {
 
@@ -54,7 +54,7 @@ public class MedRecord {
 	private DateIn entryDate;
 	private DateIn dateOut;
 	private Pet sick;
-	private ArrayList<ReqMed> meds;
+	private ArrayList<ReqMed> medicines;
 
 	//--------------------------------------------------------------------------------------------------
 
@@ -81,7 +81,7 @@ public class MedRecord {
 		this.status = status;
 		this.entryDate = entryDate;
 		this.sick = sick;
-		meds = new ArrayList<ReqMed>();
+		medicines = new ArrayList<ReqMed>();
 		this.fee = calculatingFee();
 	}
 
@@ -234,7 +234,7 @@ public class MedRecord {
 	 * @param petsMeds an arrayList of the medicines
 	 */
 	public void addMeds(ArrayList<ReqMed> petsMeds) {
-		meds = petsMeds;
+		medicines = petsMeds;
 	}
 
 	/**
@@ -300,8 +300,8 @@ public class MedRecord {
 						}
 					break;	
 				}				
-				for (int i = 0; i < meds.size() ; i++ ) {
-					total += meds.get(i).priceMed() ;
+				for (int i = 0; i < medicines.size() ; i++ ) {
+					total += medicines.get(i).priceMed() ;
 				}					
 			}else {
 				int dayE = dateOut.getDay();					
@@ -357,8 +357,8 @@ public class MedRecord {
 						}
 					break;
 				}
-				for (int in = 0 ; in < meds.size() ; in++ ) {
-					total = total + meds.get(in).priceMed() ;
+				for (int in = 0 ; in < medicines.size() ; in++ ) {
+					total = total + medicines.get(in).priceMed() ;
 				}				
 			}
 		}
@@ -392,10 +392,10 @@ public class MedRecord {
 				msg += "| Prescribed medications:\n";
 				msg += "|\n";
 				int number = 0;
-				for (int i = 0; i < meds.size() ; i++ ) {
+				for (int i = 0; i < medicines.size() ; i++ ) {
 					++number;
 					msg += "| Med #"+number+"\n";
-					msg += meds.get(i).showMedsinfo();			
+					msg += medicines.get(i).showMedsinfo();			
 				}
 				msg += "+-----------------------------------------------------------------------------+\n";
 		return msg;
@@ -406,7 +406,7 @@ public class MedRecord {
 	 * @param medInMatter is the medicine
 	 */
 	public void addNewMed(ReqMed medInMatter) {
-		meds.add(medInMatter);
+		medicines.add(medInMatter);
 	}
 
  }

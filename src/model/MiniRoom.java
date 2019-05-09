@@ -12,7 +12,7 @@ package model;
 
 /**
  * This class contain the information about the mini rooms.<br>
- * @author Sebastián Barrera.<br>
+ * @author Alejandro Garcia.<br>
  */
 public class MiniRoom { 
 
@@ -54,7 +54,7 @@ public class MiniRoom {
 	 * @param owner Is the name of the owner of the pet that is in the mini room. If there isn't a pet is a empty String <br>
 	 * @param guest Is the object of the pet in the mini room<br>
 	 */
-	public MiniRoom(boolean available, int numberOfMiniRoom, String pet, String owner, Pet guest){
+	public MiniRoom(boolean available, int numberOfMiniRoom, String pet, String owner, Pet guest) {
 		this.available = available;
 		this.numberOfMiniRoom = numberOfMiniRoom;
 		this.pet = pet;
@@ -144,26 +144,18 @@ public class MiniRoom {
 	 * @param kind says if is a client or a patient
 	 * @return an <code>String</code> specifying the
 	 */ 
-	public String checkIfItsHospitalized(int kind, String theName){
+	public String checkIfItsHospitalized(int kind, String theName) {
 		String msg = "";
 		switch (kind) {
 			case 1: 
-				if (theName.equalsIgnoreCase(owner)){
-					
-				}
-				else{
+				if (!theName.equalsIgnoreCase(owner)) {
 					msg += "ERROR: No match found\n";
 				}
 			break;
 			case 2:
-				if (theName.equalsIgnoreCase(pet)){
-					
-				}
-				else{
+				if (!theName.equalsIgnoreCase(pet)) {
 					msg += "ERROR: No match found\n";
 				}
-			break;
-			default:
 			break;
 		}
 		return msg;

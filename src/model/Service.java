@@ -14,7 +14,7 @@ package model;
 /**
  * This class maintains the service and all the information about it.
  * @see java.lang.Object
- * @author Sebastián Barrera.
+ * @author Alejandro Garcia.<br>
  */
 public class Service{
 
@@ -23,11 +23,11 @@ public class Service{
 	//Constant
 
 	//--------------------------------------------------------------------------------------------------
-	public final static double BATHP = 20000.0 ;
-	public final static double BATHDOMP = 30000.0;
-	public final static double TEETHP = 12000.0;
-	public final static double NAILSP = 8000.0;
-	public final static double SHOTP = 45000.0;
+	public final static double BATH_P = 20000.0 ;
+	public final static double BATHDOM_P = 30000.0;
+	public final static double TEETH_P = 12000.0;
+	public final static double NAILS_P = 8000.0;
+	public final static double SHOT_P = 45000.0;
 	public final static char BATH = 'b';
 	public final static char BATHDOM = 'd';
 	public final static char TEETH = 't';
@@ -66,7 +66,7 @@ public class Service{
 	 * @param pet A Pet object with which to initialize<br>
 	 * @param serviceDate Is the day of the service<br>
 	 */
-	public Service(char type, String ownerId, String petId, Pet pet, DateIn serviceDate){
+	public Service(char type, String ownerId, String petId, Pet pet, DateIn serviceDate) {
 		this.type = type;
 		this.ownerId = ownerId;
 		this.petId = petId;
@@ -134,33 +134,33 @@ public class Service{
 	 * <b>Sets</b> the initial price of the service.<br>
 	 * @return an <code>double</code> specifying the initial price
 	 */
-	public double setInitialPrice(){
-		double cost = 0.0;
+	public double setInitialPrice() {
+		double depend = 0.0;
 		switch (type) {
 			case 'b':
-				cost = BATHP;
+				depend = BATH_P;
 			break;
 			case 'd':
-				cost = BATHDOMP;
+				depend = BATHDOM_P;
 			break;
 			case 't':
-				cost = TEETHP;
+				depend = TEETH_P;
 			break;
 			case 'n':
-				cost = NAILSP;
+				depend = NAILS_P;
 			break;
 			case 's':
-				cost = SHOTP;
+				depend = SHOT_P;
 			break;	
 		}
-		return cost;
+		return depend;
 	}
 
 	/**
 	 * Shows all the information of the service
 	 * @return an <code>String</code> specifying the service information
 	 */
-	public String toString(){
+	public String toString() {
 		String msg = "\n";
 		msg += "\n";
 		msg += "+-----------------------------------------------------------------------------+\n";
@@ -178,26 +178,26 @@ public class Service{
 	 * @param type Is the type of service  
 	 * @return an <code>String</code> specifying the service
 	 */
-	public String type2String(char type){
-		String word = "";
+	public String type2String(char type) {
+		String selection = "";
 		switch (type) {
 			case BATH:
-				word = "Bath";
+				selection = "Bath";
 			break;
 			case BATHDOM:
-				word = "Bath to go";
+				selection = "Bath to go";
 			break;
 			case TEETH:
-				word = "Dental prophylaxis";
+				selection = "Dental prophylaxis";
 			break;
 			case NAILS:
-				word = "Cutting nails";
+				selection = "Cutting nails";
 			break;
 			case SHOT:
-				word = "Vaccination";
+				selection = "Vaccination";
 			break;	
 		}
-		return word;
+		return selection;
 	}
 
 }

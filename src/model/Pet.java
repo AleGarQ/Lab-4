@@ -15,7 +15,7 @@ import java.util.*;
 
 /**
  * This class is for the patient.<br>
- * @author Sebastián Barrera.<br>
+ * @author Alejandro Garcia.<br>
  */
 public class Pet{
 
@@ -47,7 +47,7 @@ public class Pet{
 
 	//--------------------------------------------------------------------------------------------------
 	private ArrayList<MedRecord> records;
-	private Client owner;
+	private Person owner;
 	private ArrayList<Service> services;
 
 	//--------------------------------------------------------------------------------------------------
@@ -65,7 +65,7 @@ public class Pet{
 	 * @param height Is the height of the pet<br>
 	 * @param owner Is the owner of the pet<br>
 	 */
-	public Pet(String name, String type, double age, double weight, double height, Client owner){
+	public Pet(String name, String type, double age, double weight, double height, Person owner) {
 		this.name = name;
 		this.type = type;
 		this.age = age;
@@ -164,7 +164,7 @@ public class Pet{
 	 * @return an <code>double</code> specifying the pet body mass index.<br>
 	 * @throws ArithmeticException If the height is zero, so an exception is thrown due to the division on zero does not exist.<br>
 	 */
-	public  double calculateBmi(){
+	public  double calculateBmi() {
 		return (weight / (height * height));
 	}
 
@@ -172,7 +172,7 @@ public class Pet{
 	 * shows all the information of the pet
 	 * @return an <code>String</code> specifying the pets information
 	 */
-	public String showPetsinfo(){
+	public String showPetsinfo() {
 		String msg = "";
 		msg += "| Pet's name is: "+name+"\n";
 		msg += "| Pet's species is: "+type+"\n";
@@ -189,7 +189,7 @@ public class Pet{
 	 * @param newMedRec the record to add
 	 * @param petsMeds the medicines of the record
 	 */
-	public void addMedRec(MedRecord newMedRec, ArrayList<ReqMed> petsMeds){
+	public void addMedRec(MedRecord newMedRec, ArrayList<ReqMed> petsMeds) {
 		newMedRec.setPetInfo(showPetsinfo());
 		newMedRec.setOwnerInfo(owner.contactInfo());
 		newMedRec.addMeds(petsMeds);
@@ -201,7 +201,7 @@ public class Pet{
 	 * calculate the gather cost
 	 * @return an <code>double</code> specifying the gather cost
 	 */
-	public double gatherCosts(){
+	public double gatherCosts() {
 		double full = 0.0;
 		for (int i = 0; i < records.size(); i++ ) {
 			full += records.get(i).getFee();
@@ -213,7 +213,7 @@ public class Pet{
 	 * show all the records
 	 * @return an <code>String</code> specifying all the records
 	 */
-	public String showAllRecords(){
+	public String showAllRecords() {
 		String msg = "";
 		for (int i = 0; i < records.size(); i++ ) {
 			msg += records.get(i).medRecordInfo();
@@ -226,7 +226,7 @@ public class Pet{
 	/**
 	 * To take off the pet from de veterinary
 	 */
-	public void cutItOff(){
+	public void cutItOff() {
 		MedRecord aboutToEnd = records.get(records.size() - 1);
 		Calendar today = new GregorianCalendar();
 				int monthT = today.get(Calendar.MONTH) + 1;
@@ -243,7 +243,7 @@ public class Pet{
 	 * <b>post:</b> A new symptom were added to the patient clinic story.<br>
 	 * @param symptomsEdit Is the new symptom presented. This param mustn't be null.<br>
 	 */
-	public void addSymptoms(String symptomsEdit){
+	public void addSymptoms(String symptomsEdit) {
 		MedRecord recInMatter = records.get(records.size()-1);
 		String previousS = recInMatter.getSymptoms();
 		previousS += " | \n"+symptomsEdit;
@@ -256,7 +256,7 @@ public class Pet{
 	 * <b>post:</b> New notes were added to the possible diagnostic in the patient clinic story.<br>
 	 * @param diagnosysEdit Is the notes of possible diagnostic. This param mustn't be null.<br>
 	 */
-	public void addDiagnosys(String diagnosysEdit){
+	public void addDiagnosys(String diagnosysEdit) {
 		MedRecord recInMatter = records.get(records.size()-1);
 		String previousD = recInMatter.getDiagnosys();
 		previousD += " | \n"+diagnosysEdit;
@@ -274,7 +274,7 @@ public class Pet{
 	 * @param medsFrecuency Is the frequency of medicine application. This param could be empty.<br>
 	 * @return an <code>String</code> message that indiques if medicine was added to the patient clinic story<br>
 	 */
-	public String addMedicine(String medsName, double medsDose, double medsPrice, String medsFrecuency){
+	public String addMedicine(String medsName, double medsDose, double medsPrice, String medsFrecuency) {
 		ReqMed medInMatter = new ReqMed (medsName, medsDose, medsPrice, medsFrecuency);
 		MedRecord recInMatter = records.get(records.size()-1);
 		recInMatter.addNewMed(medInMatter);
@@ -285,10 +285,10 @@ public class Pet{
 	 * count how many hospitalizations have
 	 * @return an <code>integrer</code> specifying the hospitalizations times
 	 */
-	public int countMyHospitalizations(){
+	public int countMyHospitalizations() {
 		int msg = 0;
 
-		if(records != null){
+		if(records != null) {
 			msg += records.size();
 		}
 		return msg;
@@ -299,7 +299,7 @@ public class Pet{
 	 * @param serviceSelection the user selection for the service
 	 * @return an <code>double</code>  specifying the calculate the service fee
 	 */
-	public double servicesFees(int serviceSelection){
+	public double servicesFees(int serviceSelection) {
 		double msg = 0.0;
 		switch (serviceSelection) {
 			case 0:
@@ -333,11 +333,11 @@ public class Pet{
 	 * @param serviceChar the user selection for the service
 	 * @return an <code>double</code> specifying the fee of the service
 	 */
-	public double feeServices(char serviceChar){
+	public double feeServices(char serviceChar) {
 		double msg = 0.0;
 
 		for (int i = 0; i<services.size() ; i++ ) {
-			if(serviceChar == services.get(i).getType()){
+			if(serviceChar == services.get(i).getType()) {
 				msg += services.get(i).getPrice();
 			}	
 		}
@@ -348,7 +348,7 @@ public class Pet{
 	 * add a service to the pet
 	 * @param newService the service to add
 	 */
-	public void addService(Service newService){
+	public void addService(Service newService) {
 		services.add(newService);
 	}
 

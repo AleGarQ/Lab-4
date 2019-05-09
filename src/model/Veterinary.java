@@ -16,7 +16,7 @@ import java.util.*;
 /**
  * This is the principal class.
  * @see java.lang.Object
- * @author Sebastián Barrera.
+ * @author Alejandro Garcia.<br>
  */
 public class Veterinary{
 
@@ -38,7 +38,7 @@ public class Veterinary{
 	//Relations
 
 	//--------------------------------------------------------------------------------------------------
-	private ArrayList<Client> clientsOwners;
+	private ArrayList<Person> clientsOwners;
 	private MiniRoom[] rooms;
 
 	//--------------------------------------------------------------------------------------------------
@@ -51,10 +51,10 @@ public class Veterinary{
      * Veterinary no-argument constructor initializes the name of the veterinary,<br>
      * the array of mini rooms and the arrayList that contains the clientsAAA.<br>
      */
-	public Veterinary(){
+	public Veterinary() {
 		this.name = "Mi Pequenia Mascota";
 		rooms = new MiniRoom[MiniRoom.ALLROOMS];
-		clientsOwners = new ArrayList<Client>();  
+		clientsOwners = new ArrayList<Person>();  
 	}
 
 	/**
@@ -70,9 +70,9 @@ public class Veterinary{
 	 * @param choise a number that represents the animal type
 	 * @return an <code>String</code> specifying the animal type
 	 */
-	public  String convertChoise2Type (int choise){
+	public  String convertChoise2Type (int choise) {
 		String msg = "";
-		switch (choise){
+		switch (choise) {
 			case 1: 
 				msg += Pet.DOG;
 			break;
@@ -104,7 +104,7 @@ public class Veterinary{
 	 * @param room8 the eight mini room
 	 */
 	public void createRooms(MiniRoom room1, MiniRoom room2, MiniRoom room3 , MiniRoom room4, 
-							MiniRoom room5, MiniRoom room6, MiniRoom room7, MiniRoom room8){
+							MiniRoom room5, MiniRoom room6, MiniRoom room7, MiniRoom room8) {
 		/*for (int i=0;i<=7;i++) {
 			rooms[i] = rooms + i+1; 
 		}*/
@@ -123,7 +123,7 @@ public class Veterinary{
 	 * @param theNew a new client
 	 * @param clientsPets represents the pets of the client
 	 */
-	public  void createPerson(Client theNew, ArrayList<Pet> clientsPets){
+	public  void createPerson(Person theNew, ArrayList<Pet> clientsPets) {
 		clientsOwners.add(theNew);
 		theNew.createPet(clientsPets);
 	}
@@ -132,10 +132,10 @@ public class Veterinary{
 	 * tells if a miniroom is aible
 	 * @return an <code>boolean</code> specifying if the mini room is aible
 	 */
-	public boolean miniRoomAvailable(){
+	public boolean miniRoomAvailable() {
 		boolean msg =  false;
-		for(int i = 0 ; i < MiniRoom.ALLROOMS && !msg ; i++){
-			if(rooms[i].getAvailable()){
+		for(int i = 0 ; i < MiniRoom.ALLROOMS && !msg ; i++) {
+			if(rooms[i].getAvailable()) {
 				msg = true;
 			}
 		}
@@ -148,30 +148,30 @@ public class Veterinary{
 	 * @param clientsId  is the client id
 	 * @return an <code>String</code> specifying the client information
 	 */
-	public String showClientsInfo(String clients, String clientsId){
+	public String showClientsInfo(String clients, String clientsId) {
 		String msg = "";
 		msg += "*******************************************************\n";
 		msg += "* ERROR: There is not a clientsOwners with that name and ID. *\n";
  		msg += "*******************************************************";
-		Client person = findPerson(clients, clientsId);
-		if(person != null){
+		Person person = findPerson(clients, clientsId);
+		if(person != null) {
 			msg = person.showMyinfo();
 		}
 		return msg;		
 	}
 
 	/**
-	 * find a person
+	 * find a person 
 	 * @param clients is the client name
 	 * @param clientsId is the client id
 	 * @return an object <code>Person</code> of the founded person
 	 */
-	public Client findPerson(String clients, String clientsId){
-		Client thePerson = null;
+	public Person findPerson(String clients, String clientsId) {
+		Person thePerson = null;
 		boolean theStop = false;
 		for (int i = 0; i < clientsOwners.size() && !theStop ; i++ ) {
 			if ((clientsOwners.get(i).getName()).equalsIgnoreCase(clients)
-				&& (clientsOwners.get(i).getId()).equalsIgnoreCase(clientsId)){
+				&& (clientsOwners.get(i).getId()).equalsIgnoreCase(clientsId)) {
 				thePerson = clientsOwners.get(i);
 				theStop = true;
 			}
@@ -187,16 +187,16 @@ public class Veterinary{
 	 * @return an <code>String</code> specifying the
 	 */
 	public String showContactInfo(int kind, String theName, String personId) {
-		String msg = "";
+		String msg  = "";
+		boolean ward = false;
 		switch (kind) {
 			case 1: 
-				boolean hold = false;
-				for (int i = 0 ; i < MiniRoom.ALLROOMS && !hold ; i++) {
+				for (int i = 0 ; i < MiniRoom.ALLROOMS && !ward ; i++) {
 					String itsHospitalized = rooms[i].checkIfItsHospitalized(kind, theName);
-					if(itsHospitalized.equalsIgnoreCase("")){ 
-						hold = true;
-						Client person = findPerson(theName, personId);
-						if (person != null){
+					if(itsHospitalized.equalsIgnoreCase("")) { 
+						ward = true;
+						Person person = findPerson(theName, personId);
+						if (person != null) {
 							msg = person.contactInfo();
 						}	
 					}else {
@@ -205,20 +205,19 @@ public class Veterinary{
 				}
 			break;
 			case 2:
-				boolean holdOn = false;
-				for (int i = 0 ; i < MiniRoom.ALLROOMS && !holdOn ; i++) {
+				for (int i = 0 ; i < MiniRoom.ALLROOMS && !ward ; i++) {
 					String itsHospitalized2 = rooms[i].checkIfItsHospitalized(kind, theName);
-					if(itsHospitalized2.equalsIgnoreCase("")){ 
-						holdOn = true;
+					if(itsHospitalized2.equalsIgnoreCase("")) { 
+						ward = true;
 						String ownersName = rooms[i].getOwner();
-						boolean theStop2 = false;
-						Client actualPerson = null;
-						for (int inde = 0; inde < clientsOwners.size() && !theStop2 ; inde++ ) {
+						boolean ward2 = false;
+						Person actualPerson = null;
+						for (int inde = 0; inde < clientsOwners.size() && !ward2 ; inde++ ) {
 							actualPerson = clientsOwners.get(inde);
 							if ((actualPerson.getName()).equalsIgnoreCase(ownersName) 
-								&& actualPerson.reviewPet(theName)){
+								&& actualPerson.reviewPet(theName)) {
 								msg = actualPerson.contactInfo();
-								theStop2 = true;
+								ward2 = true;
 							}
 						}
 					}
@@ -240,14 +239,14 @@ public class Veterinary{
 	 * @param petsName the name of the pet
 	 * @return an <code>boolean</code> specifying the
 	 */
-	public boolean checkOwner(String name, String id, String petsName){
-		boolean isReal = false;
+	public boolean checkOwner(String name, String id, String petsName) {
+		boolean ward = false;
 		String evaluation = showClientsInfo(name, id);
 		if(evaluation.charAt(0) != '*' 
-		   && evaluation.toLowerCase().contains(petsName.toLowerCase())){
-			isReal = true;
+		   && evaluation.toLowerCase().contains(petsName.toLowerCase())) {
+			ward = true;
 		}
-		return isReal;
+		return ward;
 	}
 
 	/**
@@ -260,14 +259,14 @@ public class Veterinary{
 	 * @param sick the sick of the pet<br>
 	 */
 	public void startHospitalizeVet(String name, String id, String petsName, MedRecord newMedRec,
-									ArrayList<ReqMed> petsMeds, Pet sick){
-		Client person = findPerson(name, id);
-		if (person != null){
+									ArrayList<ReqMed> petsMeds, Pet sick) {
+		Person person = findPerson(name, id);
+		if (person != null) {
 			person.startHospitalizePers(petsName, newMedRec, petsMeds);
 		}
 		boolean theStop = false;
 		for (int in = 0; in < MiniRoom.ALLROOMS && !theStop ; in++ ) {
-			if (rooms[in].getAvailable()){
+			if (rooms[in].getAvailable()) {
 				theStop = true;
 				rooms[in].setOwner(name);
 				rooms[in].setPet(petsName);
@@ -284,10 +283,10 @@ public class Veterinary{
 	 * @param petsName the pet name<br>
 	 * @return an <code>String</code> specifying the<br>
 	 */
-	public Pet retrievePet(String name, String  id, String  petsName){
+	public Pet retrievePet(String name, String  id, String  petsName) {
 		Pet relationshipOfPet = null;
-		Client person = findPerson(name, id);
-			if (person != null){
+		Person person = findPerson(name, id);
+			if (person != null) {
 				relationshipOfPet = person.givePet(petsName);
 			}
 		return relationshipOfPet;
@@ -297,7 +296,7 @@ public class Veterinary{
 	 * gather all the fees of the hospitalization<br>
 	 * @return an <code>String</code> specifying the<br>
 	 */
-	public double gatherAllHospitalizationFees(){
+	public double gatherAllHospitalizationFees() {
 		double income = 0.0;
 		for (int i = 0; i < clientsOwners.size(); i++ ) {
 			income += clientsOwners.get(i).myBill();
@@ -309,7 +308,7 @@ public class Veterinary{
 	 * calculate the total income <br>
 	 * @return an <code>String</code> specifying the total income<br>
 	 */
-	public double totalIncome(){
+	public double totalIncome() {
 		double incomeT = 0.0;
 		incomeT += gatherAllHospitalizationFees();
 		incomeT += feeServicesVeterinary(0);
@@ -320,7 +319,7 @@ public class Veterinary{
 	 * calculate all the hospitalization average<br>
 	 * @return an <code>String</code> specifying the hospitalization average<br>
 	 */
-	public double hospitalizationAverage(){
+	public double hospitalizationAverage() {
 		double hAverage = 0.0;
 		for (int i = 0; i < clientsOwners.size(); i++ ) {
 			hAverage += clientsOwners.get(i).myBill();
@@ -333,7 +332,7 @@ public class Veterinary{
 	 * count how many hospitalizations have<br>
 	 * @return an <code>integrer</code> specifying the hospitalizations times<br>
 	 */
-	public int countAllHospitalizations(){
+	public int countAllHospitalizations() {
 		int many = 0;
 		for (int i = 0; i < clientsOwners.size(); i++ ) {
 			many += clientsOwners.get(i).countHospitalizations();
@@ -345,11 +344,11 @@ public class Veterinary{
 	 * shows all the record of a the pets<br>
 	 * @return an <code>String</code> specifying the records<br>
 	 */
-	public String medRecsFromHPet(){
+	public String medRecsFromHPet() {
 		String msg = "";
-		for(int i = 0 ; i < MiniRoom.ALLROOMS ; i++){
-			if(rooms[i].getAvailable() 
-			   && rooms[i].getHostage() == null){
+		for (int i = 0 ; i < MiniRoom.ALLROOMS ; i++) {
+			if (rooms[i].getAvailable() 
+			&&  rooms[i].getHostage() == null) {
 				
 			}
 			else{
@@ -364,11 +363,11 @@ public class Veterinary{
 	 * @param petsName the pet name<br>
 	 * @return an <code>int</code> specifying the mini room of the pet<br>
 	 */
-	public int retrieveNumberMiniRoom(String petsName){
+	public int retrieveNumberMiniRoom(String petsName) {
 		int theNumber = 0;
 		boolean theStop = false;
-		for(int i = 0 ; i < MiniRoom.ALLROOMS && !theStop ; i++){
-			if(rooms[i].getPet().equalsIgnoreCase(petsName) ){ 
+		for(int i = 0 ; i < MiniRoom.ALLROOMS && !theStop ; i++) {
+			if(rooms[i].getPet().equalsIgnoreCase(petsName) ) { 
 				theNumber = rooms[i].getNumberOfMiniRoom();
 				theStop = true;
 			}	
@@ -383,11 +382,11 @@ public class Veterinary{
 	 * @param petsName the pet name<br>
 	 * @return an <code>String</code> specifying the record of a pet<br>
 	 */
-	public String showAPetMedRecs(String name, String  id, String  petsName){
+	public String showAPetMedRecs(String name, String  id, String  petsName) {
 		boolean theStop = false;
 		String msg = "ERROR: No match found";	
-		Client person = findPerson(name, id);
-		if (person != null){
+		Person person = findPerson(name, id);
+		if (person != null) {
 			msg = person.givePet(petsName).showAllRecords();
 		} 
 		return msg;
@@ -400,8 +399,8 @@ public class Veterinary{
 	 * @param petsName the pet name<br>
 	 */
 	public void removePet(String name, String  id, String  petsName) {
-		Client person = findPerson(name, id);
-		if (person != null){
+		Person person = findPerson(name, id);
+		if (person != null) {
 			person.givePet(petsName).cutItOff();
 			boolean wait = false;
 			for(int i = 0 ; i < MiniRoom.ALLROOMS && !wait ; i++) {
@@ -422,21 +421,21 @@ public class Veterinary{
 	 * @param id the client id<br>
 	 * @param petsName the pets name<br>
 	 * @param edition what the user want to edit<br>
-	 * @param symptomsEdit the new symptons<br>
+	 * @param symptnsEdit the new symptons<br>
 	 * @param diagnosysEdit the new diagnosys<br>
 	 * @param medsName the medicine name<br>
 	 * @param medsDose the medicine dose<br>
 	 * @param medsPrice the medicine price <br>
 	 * @param medsFrecuency the medicine frecuency<br>
-	 * @return an <code>String</code> specifying the person located<br>
+	 * @return an <code>String</code> specifying the persone located<br>
 	 */
 	public String locatePersonWithPet2AddStuff(String name, String  id, String petsName, int edition, 
 											   String symptomsEdit, String diagnosysEdit,
 											   String medsName, double medsDose, 
-											   double medsPrice, String medsFrecuency){
+											   double medsPrice, String medsFrecuency) {
 		String msg = "";
-		Client person = findPerson(name, id);
-		if (person != null){
+		Person person = findPerson(name, id);
+		if (person != null) {
 			msg += person.locatePet2AddStuff(petsName, edition, symptomsEdit, 
 											   diagnosysEdit, medsName, medsDose, 
 											   medsPrice, medsFrecuency);
@@ -452,10 +451,10 @@ public class Veterinary{
 	 * @param newPhone the client phone<br>
 	 * @return an <code>String</code> specifying the <br>
 	 */
-	public String changeClientInfo(String name, String  id, String newAddress, String newPhone){
+	public String changeClientInfo(String name, String  id, String newAddress, String newPhone) {
 		String msg = "ERROR: No match found";
-		Client person = findPerson(name, id);
-		if (person != null){
+		Person person = findPerson(name, id);
+		if (person != null) {
 			msg = "Information has been sucessfully updated!";
 			person.modifyAddressOrPhone(newAddress, newPhone);
 		}
@@ -467,7 +466,7 @@ public class Veterinary{
 	 * @param serviceSelection is the user selection for the service<br>
 	 * @return an <code>double</code> specifying the service fee<br>
 	 */
-	public double feeServicesVeterinary(int serviceSelection){
+	public double feeServicesVeterinary(int serviceSelection) {
 		double msg = 0.0;
 		switch (serviceSelection) {
 			case 0:
@@ -476,7 +475,7 @@ public class Veterinary{
 				msg += feeServicesPeople(3);
 				msg += feeServicesPeople(4);
 				msg += feeServicesPeople(5);
-				break;
+			break;
 			default:
 				msg = feeServicesPeople(serviceSelection);	
 			break;
@@ -489,9 +488,9 @@ public class Veterinary{
 	 * @param serviceSelection is the service selected<br>
 	 * @return an <code>String</code> specifying the fee<br>
 	 */
-	public double feeServicesPeople(int serviceSelection){
+	public double feeServicesPeople(int serviceSelection) {
 		double msg = 0.0;
-		for (int i = 0; i<clientsOwners.size() ; i++ ) {
+		for (int i = 0; i < clientsOwners.size() ; i++ ) {
 			msg += clientsOwners.get(i).petsFeeServices(serviceSelection);	
 		}
 		return msg;
@@ -502,28 +501,28 @@ public class Veterinary{
 	 * @param serviceSelection the user selection for the service<br>
 	 * @return an <code>char</code> specifying the service<br>
 	 */
-	public char convertChoise2Char(int serviceSelection){
-		char answer = 'a';
+	public char convertChoise2Char(int serviceSelection) {
+		char option = 'a';
 		switch (serviceSelection) {
 			case 1:
-				answer = 'b';	
+				option = 'b';	
 			break;
 			case 2:
-				answer = 'd';
+				option = 'd';
 			break;
 			case 3:
-				answer = 't';
+				option = 't';
 			break;
 			case 4:
-				answer = 'n';
+				option = 'n';
 			break;
 			case 5:
-				answer = 's';
+				option = 's';
 			break;
 			default:
 			break;	
 		}
-		return answer;
+		return option;
 	}
 
 	/**
@@ -533,9 +532,9 @@ public class Veterinary{
 	 * @param clientPet the pet of the client<br>
 	 * @param newService the service to add<br>
 	 */
-	public void startServiceVet(String name, String id, Pet clientPet, Service newService){
-		Client person = findPerson(name, id);
-		if (person != null){
+	public void startServiceVet(String name, String id, Pet clientPet, Service newService) {
+		Person person = findPerson(name, id);
+		if (person != null) {
 			person.startServicePers(clientPet, newService);
 		}
 	}

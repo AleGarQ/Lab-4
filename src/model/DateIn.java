@@ -12,7 +12,7 @@ package model;
 
 /**
  * This class maintains the time.<br>
- * @author Sebastián Barrera.<br>
+ * @author Alejandro Garcia.<br>
  */
 public class DateIn {
 
@@ -49,7 +49,7 @@ public class DateIn {
 	 * @param month Is the number of the current month<br>
 	 * @param year Is the current year<br>
 	 */
-	public DateIn(int day, int month, int year){
+	public DateIn(int day, int month, int year) {
 	this.day = day;
 	this.month = month;
 	this.year = year;
@@ -108,7 +108,7 @@ public class DateIn {
 	 * Shows a String of the date
 	 * @return an <code>String</code> specifying the date
 	 */
-	public String convertDateToString(){
+	public String convertDateToString() {
 		String msg = "";
 		msg += Integer.toString(day);
 		msg += "/";

@@ -13,9 +13,9 @@ import java.util.*;
 
 /**
  * This class contains all the information of the client.<br>
- * @author Sebastián Barrera.<br>
+ * @author Alejandro Garcia.<br>
  */
-public class Client {
+public class Person {
 
 	//--------------------------------------------------------------------------------------------------
 
@@ -47,13 +47,13 @@ public class Client {
 	//--------------------------------------------------------------------------------------------------
 
 	/**
-	 * Client constructor<br>
+	 * Person constructor<br>
 	 * @param name Is the client name<br>
 	 * @param id Is the client id<br>
 	 * @param address Is the client address <br>
 	 * @param phone Is the client phone<br>
 	 */
-	public Client(String name, String id, String address, String phone){
+	public Person(String name, String id, String address, String phone) {
 		this.name = name;
 		this.id = id;
 		this.address = address;
@@ -129,7 +129,7 @@ public class Client {
 	 * create a new pets objects in ta arrayList
 	 * @param clientsPets a list of pets
 	 */
-	public void createPet(ArrayList<Pet> clientsPets){
+	public void createPet(ArrayList<Pet> clientsPets) {
 		pets = clientsPets;
 	}
 
@@ -137,7 +137,7 @@ public class Client {
 	 * show the client informtation
 	 * @return an <code>String</code> specifying the client information
 	 */
-	public String showMyinfo(){
+	public String showMyinfo() {
 		String msg = "";
 		msg += "+--------------------------------------------------------------+\n";
 		msg += "| The client's name is: "+name+"\n";
@@ -162,7 +162,7 @@ public class Client {
 	 * show the information of the owner
 	 * @return an <code>String</code> specifying the owner information
 	 */
-	public String contactInfo(){
+	public String contactInfo() {
 		String msg = "";
 		msg += "+--------------------------------------------------------------+\n";
 		msg += "| The owner's name is: "+name+"\n";
@@ -178,7 +178,7 @@ public class Client {
 	 * @param theName the name of the pet
 	 * @return an <code>boolean</code> specifying if there is a pet
 	 */
-	public boolean reviewPet(String theName){
+	public boolean reviewPet(String theName) {
 		boolean hasIt = false;
 		for (int i = 0; i < pets.size() && !hasIt ; i++ ) {
 			if ((pets.get(i).getName()).equalsIgnoreCase(theName)) {
@@ -194,9 +194,9 @@ public class Client {
 	 * @param newMedRec the medicine record
 	 * @param petsMeds the medicines of the pet
 	 */
-	public void startHospitalizePers(String petsName, MedRecord newMedRec, ArrayList<ReqMed> petsMeds){
+	public void startHospitalizePers(String petsName, MedRecord newMedRec, ArrayList<ReqMed> petsMeds) {
 		Pet pet = givePet(petsName);
-		if(pet != null){
+		if(pet != null) {
 			pet.addMedRec(newMedRec, petsMeds);
 		}
 	}
@@ -206,7 +206,7 @@ public class Client {
 	 * @param theName the name of the pet
 	 * @return an object <code>Pet</code> specifying the
 	 */
-	public Pet givePet(String theName){
+	public Pet givePet(String theName) {
 		Pet found = null;
 		boolean hasIt = false;
 		for (int i = 0; i < pets.size() && !hasIt ; i++ ) {
@@ -222,7 +222,7 @@ public class Client {
 	 * the gather for pet
 	 * @return an <code>double</code> specifying the fee
 	 */
-	public double myBill(){
+	public double myBill() {
 		double bill = 0.0;
 		for (int i = 0; i < pets.size(); i++ ) {
 			bill += pets.get(i).gatherCosts();
@@ -234,7 +234,7 @@ public class Client {
 	 * count how many hospitalizations have
 	 * @return an <code>integrer</code> specifying the hospitalizations times
 	 */
-	public int countHospitalizations(){
+	public int countHospitalizations() {
 		int counter = 0;
 		for (int i = 0; i < pets.size(); i++ ) {
 			counter += pets.get(i).countMyHospitalizations();
@@ -251,10 +251,10 @@ public class Client {
 	 * @param medsDose the medicine dose<br>
 	 * @param medsPrice the medicine price <br>
 	 * @param medsFrecuency the medicine frecuency<br>
-	 * @return an <code>String</code> specifying the Client located<br>
+	 * @return an <code>String</code> specifying the persone located<br>
 	 */
 	public String locatePet2AddStuff(String petsName, int  edition, String symptomsEdit, String diagnosysEdit, 
-									 String medsName, double medsDose, double medsPrice, String medsFrecuency){
+									 String medsName, double medsDose, double medsPrice, String medsFrecuency) {
 		String msg = "";
 		Pet pet = givePet(petsName);
 		switch (edition) {
@@ -278,8 +278,8 @@ public class Client {
 	*@param newAddress Is the new address of the client. This param could be empty.<br>
 	*@param newPhone Is the new phone number of the client. This param could be empty.<br>
 	*/
-	public void modifyAddressOrPhone(String newAddress, String newPhone){
-		if(newAddress.equalsIgnoreCase("")){
+	public void modifyAddressOrPhone(String newAddress, String newPhone) {
+		if(newAddress.equalsIgnoreCase("")) {
 			phone = newPhone;
 		} else {
 			address = newAddress;
@@ -291,7 +291,7 @@ public class Client {
 	 * @param serviceSelection is the user selection for the service
 	 * @return an <code>double</code> specifying all the pet services fees
 	 */
-	public double allPetsServicesFees(int serviceSelection){
+	public double allPetsServicesFees(int serviceSelection) {
 		double msg = 0.0;
 		switch (serviceSelection) {
 			case 0:
@@ -313,7 +313,7 @@ public class Client {
 	 * @param serviceSelection is the user selection for the service
 	 * @return an <code>double</code> specifying the
 	 */
-	public double petsFeeServices(int serviceSelection){
+	public double petsFeeServices(int serviceSelection) {
 		double msg = 0.0;
 		for (int i = 0; i<pets.size() ; i++ ) {
 			msg += pets.get(i).servicesFees(serviceSelection);	
@@ -326,7 +326,7 @@ public class Client {
 	 * @param clientPet the pet to the service
 	 * @param newService the service
 	 */
-	public void startServicePers(Pet clientPet, Service newService){
+	public void startServicePers(Pet clientPet, Service newService) {
 		clientPet.addService(newService);
 	}
 
